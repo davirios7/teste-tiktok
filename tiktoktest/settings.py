@@ -27,7 +27,7 @@ SECRET_KEY = os.getenv("SECRET_KEY")
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-TIKTOK_CLIENT_KEY = os.getenv("TIKTOK_CLIENT_KEY")
+TIKTOK_CLIENT_ID = os.getenv("TIKTOK_CLIENT_ID")
 TIKTOK_CLIENT_SECRET = os.getenv("TIKTOK_CLIENT_SECRET")
 TIKTOK_REDIRECT_URI = os.getenv("TIKTOK_REDIRECT_URI")
 
