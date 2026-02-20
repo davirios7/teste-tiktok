@@ -22,6 +22,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.home),
     path('login/', views.tiktok_login),
+    path('logout/', views.tiktok_logout),
     path('callback/', views.tiktok_callback),
     path('terms/', views.terms),
     path('privacy/', views.privacy),

@@ -68,8 +68,35 @@ def tiktok_callback(request):
     response = requests.post(token_url, data=data, headers=headers)
     token_data = response.json()
 
+    request.session["tiktok_access_token"] = token_data["access_token"]
+
     return JsonResponse(token_data)
 
+def tiktok_logout(request):
+    access_token = request.session.get("tiktok_access_token")
+
+    if not access_token:
+        return JsonResponse({"error": "Usuário não logado"}, status=400)
+
+    revoke_url = "https://open.tiktokapis.com/v2/oauth/revoke/"
+
+    data = {
+        "client_key": settings.TIKTOK_CLIENT_ID,
+        "client_secret": settings.TIKTOK_CLIENT_SECRET,
+        "token": access_token,
+    }
+
+    response = requests.post(revoke_url, data=data)
+
+    request.session.flush()
+
+    if response.status_code == 200:
+        return JsonResponse({"status": "Token revogado com sucesso"})
+    else:
+        return JsonResponse({
+            "error": "Falha ao revogar",
+            "detail": response.text
+        }, status=400)
 
 def tiktok_verify(request):
     return HttpResponse(
