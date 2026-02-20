@@ -25,4 +25,5 @@ urlpatterns = [
     path('callback/', views.tiktok_callback),
     path('terms/', views.terms),
     path('privacy/', views.privacy),
+    path("tiktokcic7Ymoi0oaksmI25ufPP5k1eAC2XteY.txt", views.tiktok_verify),
 ]
