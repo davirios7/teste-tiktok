@@ -1,7 +1,8 @@
 import requests
 from django.conf import settings
 from django.shortcuts import redirect, render
-from django.http import JsonResponse
+from django.http import JsonResponse, HttpResponse
+
 
 
 def home(request):
@@ -19,6 +20,11 @@ def tiktok_login(request):
     )
     return redirect(auth_url)
 
+def tiktok_verify(request):
+    return HttpResponse(
+        "tiktok-developers-site-verification=cic7Ymoi0oaksmI25ufPP5k1eAC2XteY",
+        content_type="text/plain"
+    )
 
 def tiktok_callback(request):
     code = request.GET.get("code")
