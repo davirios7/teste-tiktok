@@ -31,7 +31,7 @@ def tiktok_login(request):
 
     auth_url = (
         "https://www.tiktok.com/v2/auth/authorize/"
-        f"?client_key={settings.TIKTOK_CLIENT_KEY}"
+        f"?client_key={settings.TIKTOK_CLIENT_ID}"
         "&response_type=code"
         "&scope=user.info.basic"
         f"&redirect_uri={settings.TIKTOK_REDIRECT_URI}"
@@ -53,7 +53,7 @@ def tiktok_callback(request):
     token_url = "https://open.tiktokapis.com/v2/oauth/token/"
 
     data = {
-        "client_key": settings.TIKTOK_CLIENT_KEY,
+        "client_key": settings.TIKTOK_CLIENT_ID,
         "client_secret": settings.TIKTOK_CLIENT_SECRET,
         "code": code,
         "grant_type": "authorization_code",
