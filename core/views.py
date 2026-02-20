@@ -30,8 +30,6 @@ def tiktok_login(request):
 
     scopes = [
         "user.info.basic",
-        "user.info.profile",
-        "user.info.stats"
     ]
 
     scope_str = quote(" ".join(scopes))
