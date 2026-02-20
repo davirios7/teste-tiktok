@@ -1,0 +1,19 @@
+# Ambiente virtual
+venv/
+.env
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Django
+db.sqlite3
+staticfiles/
+
+# VSCode
+.vscode/
+
+# MacOS
+.DS_Store
