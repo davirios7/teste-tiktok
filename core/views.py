@@ -6,6 +6,7 @@ import secrets
 from django.conf import settings
 from django.shortcuts import redirect, render
 from django.http import JsonResponse, HttpResponse
+from urllib.parse import quote
 
 
 def home(request):
@@ -33,7 +34,7 @@ def tiktok_login(request):
         "user.info.stats"
     ]
 
-    scope_str = " ".join(scopes)
+    scope_str = quote(" ".join(scopes))
 
     auth_url = (
         "https://www.tiktok.com/v2/auth/authorize/"
