@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Usuário TikTok</title>
+</head>
+<body>
+
+    <h1>Dados do Usuário</h1>
+
+    <img src="{{ user.avatar_url }}" width="120">
+
+    <p><strong>Nome:</strong> {{ user.display_name }}</p>
+    <p><strong>Open ID:</strong> {{ user.open_id }}</p>
+
+    <hr>
+
+    <h2>Tokens</h2>
+
+    <p><strong>Access Token:</strong> {{ tokens.access_token }}</p>
+    <p><strong>Refresh Token:</strong> {{ tokens.refresh_token }}</p>
+    <p><strong>Expira em:</strong> {{ tokens.expires_in }}</p>
+
+</body>
+</html>

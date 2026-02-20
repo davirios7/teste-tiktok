@@ -69,12 +69,38 @@ def tiktok_callback(request):
         "Content-Type": "application/x-www-form-urlencoded"
     }
 
-    response = requests.post(token_url, data=data, headers=headers)
-    token_data = response.json()
+    token_response = requests.post(token_url, data=data, headers=headers)
+    token_data = token_response.json()
 
-    request.session["tiktok_access_token"] = token_data["access_token"]
+    access_token = token_data.get("access_token")
 
-    return JsonResponse(token_data)
+    if not access_token:
+        return JsonResponse(token_data, status=400)
+
+    request.session["tiktok_access_token"] = access_token
+
+    user_url = "https://open.tiktokapis.com/v2/user/info/"
+
+    user_headers = {
+        "Authorization": f"Bearer {access_token}"
+    }
+
+    user_params = {
+        "fields": "open_id,display_name,avatar_url"
+    }
+
+    user_response = requests.get(user_url, headers=user_headers, params=user_params)
+    user_data = user_response.json()
+
+    if "data" not in user_data:
+        return JsonResponse(user_data, status=400)
+
+    context = {
+        "user": user_data["data"]["user"],
+        "tokens": token_data
+    }
+
+    return render(request, "user.html", context)
 
 def tiktok_logout(request):
     access_token = request.session.get("tiktok_access_token")
