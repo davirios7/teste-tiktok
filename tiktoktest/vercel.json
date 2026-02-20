@@ -1,0 +1,14 @@
+{
+  "builds": [
+    {
+      "src": "tiktoktest/wsgi.py",
+      "use": "@vercel/python"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/(.*)",
+      "dest": "tiktoktest/wsgi.py"
+    }
+  ]
+}
