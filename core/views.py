@@ -23,17 +23,23 @@ def generate_pkce():
 
     return code_verifier, code_challenge
 
-
 def tiktok_login(request):
     code_verifier, code_challenge = generate_pkce()
-
     request.session["code_verifier"] = code_verifier
+
+    scopes = [
+        "user.info.basic",
+        "user.info.profile",
+        "user.info.stats"
+    ]
+
+    scope_str = " ".join(scopes)
 
     auth_url = (
         "https://www.tiktok.com/v2/auth/authorize/"
         f"?client_key={settings.TIKTOK_CLIENT_ID}"
         "&response_type=code"
-        "&scope=user.info.basic"
+        f"&scope={scope_str}"
         f"&redirect_uri={settings.TIKTOK_REDIRECT_URI}"
         "&state=test123"
         f"&code_challenge={code_challenge}"
@@ -41,7 +47,6 @@ def tiktok_login(request):
     )
 
     return redirect(auth_url)
-
 
 def tiktok_callback(request):
     code = request.GET.get("code")
